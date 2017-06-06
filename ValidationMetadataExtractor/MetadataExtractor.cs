@@ -7,7 +7,7 @@ namespace ValidationMetadataExtractor
 {
     static class MetadataExtractor
     {
-        public static PropertyMetadata[] ExtractPropertiesMetadata(this Type objectType)
+        public static PropertyValidationMetadata[] ExtractPropertiesMetadata(this Type objectType)
 
         {
             if (objectType == null)
@@ -15,14 +15,14 @@ namespace ValidationMetadataExtractor
                 throw new ArgumentNullException(nameof(objectType));
             }
 
-            PropertyMetadata[] propertiesMetadata = objectType.GetProperties()
-                .Select(propertyInfo => new PropertyMetadata(propertyInfo))
+            PropertyValidationMetadata[] propertiesValidationMetadata = objectType.GetProperties()
+                .Select(propertyInfo => new PropertyValidationMetadata(propertyInfo))
                 .ToArray();
 
-            return propertiesMetadata;
+            return propertiesValidationMetadata;
         }
 
-        public static ValidationMedatada[] ExtractValidationAttributesMetadata(this PropertyInfo propertyInfo)
+        public static ValidationRuleMedatada[] ExtractValidationAttributesMetadata(this PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
             {
@@ -33,21 +33,21 @@ namespace ValidationMetadataExtractor
                 .OfType<ValidationAttribute>()
                 .ToArray();
 
-            ValidationMedatada[] rules = validationAttributes
+            ValidationRuleMedatada[] rules = validationAttributes
                 .Select(x => x.ExtractValidationMetadata())
                 .ToArray();
 
             return rules;
         }
 
-        public static ValidationMedatada ExtractValidationMetadata(this ValidationAttribute attribute)
+        public static ValidationRuleMedatada ExtractValidationMetadata(this ValidationAttribute attribute)
         {
             if (attribute == null)
             {
                 throw new ArgumentNullException(nameof(attribute));
             }
 
-            return new ValidationMedatada(attribute);
+            return new ValidationRuleMedatada(attribute);
         }
 
         public static Type[] AllowedTypes = new Type[]
@@ -59,7 +59,7 @@ namespace ValidationMetadataExtractor
             typeof(String)
         };
 
-        public static ValidationAttributeParameter[] ExtractValidationAttributeParameters(this ValidationAttribute attribute)
+        public static ValidationRuleParameter[] ExtractValidationAttributeParameters(this ValidationAttribute attribute)
         {
             if (attribute == null)
             {
@@ -83,16 +83,16 @@ namespace ValidationMetadataExtractor
             PropertyInfo[] resultProps = currAttrProps
                 .Concat(baseValidationAttrProps).ToArray();
 
-            ValidationAttributeParameter[] validationAttributeParameters = resultProps
+            ValidationRuleParameter[] validationRuleParameters = resultProps
                 .Where(x=>x.GetValue(attribute) != null)
-                .Select(x => new ValidationAttributeParameter()
+                .Select(x => new ValidationRuleParameter()
                 {
                     //Type = x.PropertyType.Name,
                     Name = x.Name,
                     Value = x.GetValue(attribute)
                 }).ToArray();
 
-            return validationAttributeParameters;
+            return validationRuleParameters;
         }
     }
 }

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ValidationMetadataExtractor
 {
-    public sealed class ValidationMedatada
+    public sealed class ValidationRuleMedatada
     {
-        public ValidationMedatada(ValidationAttribute baseAttribute)
+        public ValidationRuleMedatada(ValidationAttribute baseAttribute)
         {
             if (baseAttribute == null)
             {
@@ -17,7 +17,7 @@ namespace ValidationMetadataExtractor
         }
 
         public String Name => _baseAttribute.GetType().Name.Replace("Attribute", String.Empty);
-        public ICollection<ValidationAttributeParameter> Parameters => _baseAttribute.ExtractValidationAttributeParameters();
+        public ICollection<ValidationRuleParameter> Parameters => _baseAttribute.ExtractValidationAttributeParameters();
 
         private readonly ValidationAttribute _baseAttribute;
     }

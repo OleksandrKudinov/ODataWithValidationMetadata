@@ -2,7 +2,7 @@
 
 namespace ValidationMetadataExtractor
 {
-    public sealed class ValidationAttributeParameter
+    public sealed class ValidationRuleParameter
     {
         //public String Type { get; set; }
         public String Name { get; set; }

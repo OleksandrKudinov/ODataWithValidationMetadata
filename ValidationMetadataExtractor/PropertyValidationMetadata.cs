@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace ValidationMetadataExtractor
 {
-    public sealed class PropertyMetadata
+    public sealed class PropertyValidationMetadata
     {
-        public PropertyMetadata(PropertyInfo propertyInfo)
+        public PropertyValidationMetadata(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
             {
@@ -18,7 +18,7 @@ namespace ValidationMetadataExtractor
 
         public String PropertyName => _propertyInfo.Name;
         public String PropertyTypeName => _propertyInfo.PropertyType.Name;
-        public ICollection<ValidationMedatada> ValidationRules => _propertyInfo.ExtractValidationAttributesMetadata();
+        public ICollection<ValidationRuleMedatada> ValidationRules => _propertyInfo.ExtractValidationAttributesMetadata();
 
         private readonly PropertyInfo _propertyInfo;
     }

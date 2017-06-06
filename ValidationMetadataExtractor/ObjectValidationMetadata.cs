@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ValidationMetadataExtractor
 {
-    public sealed class ObjectMetadata
+    public sealed class ObjectValidationMetadata
     {
-        public ObjectMetadata(Type objectType)
+        public ObjectValidationMetadata(Type objectType)
         {
             if (objectType == null)
             {
@@ -17,7 +18,7 @@ namespace ValidationMetadataExtractor
 
         public String TypeName => _type.Name;
 
-        public ICollection<PropertyMetadata> Properties => _type.ExtractPropertiesMetadata();
+        public ICollection<PropertyValidationMetadata> Properties => _type.ExtractPropertiesMetadata();
 
         private readonly Type _type;
     }

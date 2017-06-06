@@ -42,11 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MetadataExtractor.cs" />
-    <Compile Include="ObjectMetadata.cs" />
-    <Compile Include="PropertyMetadata.cs" />
+    <Compile Include="ObjectValidationMetadata.cs" />
+    <Compile Include="PropertyValidationMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidationAttributeParameter.cs" />
-    <Compile Include="ValidationMedatada.cs" />
+    <Compile Include="ValidationRuleParameter.cs" />
+    <Compile Include="ValidationRuleMedatada.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
