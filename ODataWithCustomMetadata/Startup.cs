@@ -1,5 +1,10 @@
-﻿using Microsoft.Owin;
+﻿using System.Collections.Generic;
+using System.Web.OData.Builder;
+using System.Web.OData.Extensions;
+using Microsoft.OData.Edm;
+using Microsoft.Owin;
 using ODataWithCustomMetadata;
+using ODataWithCustomMetadata.Models;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace ODataWithCustomMetadata
@@ -27,6 +32,8 @@ namespace ODataWithCustomMetadata
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            ConfigOData(httpConfiguration);
 
             app.UseWebApi(httpConfiguration);
 
