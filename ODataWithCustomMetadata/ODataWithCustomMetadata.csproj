@@ -124,7 +124,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ValidationMetadataController.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
