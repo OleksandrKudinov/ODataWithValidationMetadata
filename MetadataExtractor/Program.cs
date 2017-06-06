@@ -10,9 +10,9 @@ namespace MetadataProvider
     {
         static void Main(string[] args)
         {
-            ObjectMetadata metadata = new ObjectMetadata(typeof(Person));
+            ObjectValidationMetadata validationMetadata = new ObjectValidationMetadata(typeof(Person));
 
-            String jsonMetadata = JObject.FromObject(metadata).ToString();
+            String jsonMetadata = JObject.FromObject(validationMetadata).ToString();
 
             Console.WriteLine(jsonMetadata);
             
@@ -24,8 +24,8 @@ namespace MetadataProvider
     {
         public void ExportMetadata<T>()
         {
-            ObjectMetadata metadata = new ObjectMetadata(typeof(T));
-            String jsonMetadata = JObject.FromObject(metadata).ToString();
+            ObjectValidationMetadata validationMetadata = new ObjectValidationMetadata(typeof(T));
+            String jsonMetadata = JObject.FromObject(validationMetadata).ToString();
             using (var f = File.CreateText($"..\\..\\..\\{typeof(T).Name}.metadata.json"))
             {
                 f.WriteLine(jsonMetadata);
