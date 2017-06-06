@@ -40,6 +40,20 @@ namespace ODataWithCustomMetadata
 
             app.UseStageMarker(PipelineStage.MapHandler);
         }
+        public void ConfigOData(HttpConfiguration config)
+        {
+            config.MapODataServiceRoute("ODataRoute", "odata", GetEdmModel());
+            config.EnsureInitialized();
+        }
+        private static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+            builder.Namespace = "ODataWithCustomMetadata";
+            builder.ContainerName = "DefaultContainer";
+            builder.EntitySet<ObjectValidationMetadata>("ValidationMetadata").EntityType.HasKey(x=>x.TypeName);
+            var edmModel = builder.GetEdmModel();
+            return edmModel;
+        }
     }
 
     public class ValidationMetadataSource
