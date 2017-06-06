@@ -126,8 +126,12 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\ValidationMetadataExtractor\ValidationMetadataExtractor.csproj">
+      <Project>{8E411650-F631-4787-BFCF-A8408AF9E5A0}</Project>
+      <Name>ValidationMetadataExtractor</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
