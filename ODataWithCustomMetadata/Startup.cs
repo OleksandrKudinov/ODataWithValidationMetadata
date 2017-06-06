@@ -10,6 +10,7 @@ namespace ODataWithCustomMetadata
     using Microsoft.Owin.FileSystems;
     using Microsoft.Owin.StaticFiles;
     using Owin;
+    using ValidationMetadataExtractor;
 
     public class Startup
     {
@@ -39,5 +40,29 @@ namespace ODataWithCustomMetadata
 
             app.UseStageMarker(PipelineStage.MapHandler);
         }
+    }
+
+    public class ValidationMetadataSource
+    {
+        public static ValidationMetadataSource Instance = new ValidationMetadataSource();
+        private ValidationMetadataSource()
+        {
+            ValidationMetadatas = new List<ObjectValidationMetadata>();
+            Initialize(); ;
+        }
+
+        public void Reset()
+        {
+            ValidationMetadatas.Clear();
+        }
+
+        public void Initialize()
+        {
+            Reset();
+            ValidationMetadatas.Add(new ObjectValidationMetadata(typeof(Person)));
+            ValidationMetadatas.Add(new ObjectValidationMetadata(typeof(Campus)));
+        }
+
+        public List<ObjectValidationMetadata> ValidationMetadatas;
     }
 }
